@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Uso y FAQ</title>
+<style>
+/* ── Reset y base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --verde:      #1a3d2b;
+  --verde-mid:  #2d6b45;
+  --dorado:     #c9a84c;
+  --dorado-clr: #e8d5a3;
+  --crema:      #f9f6ef;
+  --crema2:     #f1ead8;
+  --gris:       #3f3626;
+  --gris-sub:   #6b5c44;
+  --rojo:       #8b1a1a;
+  --borde:      rgba(201,168,76,.3);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', -apple-system, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--gris);
+  background: var(--crema);
+  display: flex;
+}
+
+/* ── Sidebar ── */
+#sidebar {
+  width: 270px;
+  min-width: 270px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--verde);
+  overflow-y: auto;
+  padding: 0 0 40px;
+  flex-shrink: 0;
+}
+.sb-logo {
+  padding: 24px 20px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sb-logo-ico {
+  font-size: 26px;
+  font-family: serif;
+  color: var(--dorado);
+  font-weight: 900;
+  line-height: 1;
+}
+.sb-logo-txt { font-size: 12px; color: rgba(255,255,255,.75); line-height: 1.4; }
+.sb-logo-txt strong { display: block; color: #fff; font-size: 13px; margin-bottom: 2px; }
+.sb-group { padding: 18px 0 4px 20px; font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(201,168,76,.6); font-weight: 700; }
+.sb-link {
+  display: block;
+  padding: 7px 20px;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background .15s, color .15s;
+  border-left: 3px solid transparent;
+}
+.sb-link:hover { background: rgba(255,255,255,.07); color: #fff; }
+.sb-link.active { background: rgba(201,168,76,.15); color: var(--dorado); border-left-color: var(--dorado); }
+.sb-sub { padding-left: 32px; font-size: 12px; color: rgba(255,255,255,.5); }
+.sb-sub:hover { color: rgba(255,255,255,.8); }
+
+/* ── Contenido ── */
+#content {
+  flex: 1;
+  min-width: 0;
+  padding: 48px 60px 80px;
+  max-width: 900px;
+}
+
+/* ── Portada ── */
+.portada {
+  text-align: center;
+  padding: 0 0 48px;
+  border-bottom: 2px solid var(--borde);
+  margin-bottom: 48px;
+}
+.portada-sigla {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background: var(--verde);
+  border-radius: 16px;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--dorado);
+  font-family: serif;
+  margin-bottom: 20px;
+}
+.portada h1 { font-size: 2.2rem; font-weight: 800; color: var(--verde); line-height: 1.2; margin-bottom: 10px; }
+.portada .sub { font-size: 1.1rem; color: var(--gris-sub); margin-bottom: 20px; }
+.portada-meta {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.portada-chip {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  color: var(--gris-sub);
+}
+.portada-chip strong { display: block; color: var(--verde); font-size: 12px;
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+.tricolor { height: 4px; width: 160px; display: flex; margin: 24px auto; border-radius: 2px; overflow: hidden; }
+.tricolor span { flex: 1; }
+.tricolor span:nth-child(1) { background: #2d6b45; }
+.tricolor span:nth-child(2) { background: var(--crema); border: 1px solid var(--borde); }
+.tricolor span:nth-child(3) { background: var(--rojo); }
+
+/* ── Secciones ── */
+.seccion {
+  margin-bottom: 60px;
+  scroll-margin-top: 30px;
+}
+h2.sec-titulo {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--verde);
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--borde);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+h2.sec-titulo .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--verde);
+  color: var(--dorado);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+h3.sub-titulo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dorado);
+  margin: 28px 0 10px;
+}
+h4.sub-sub-titulo {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--verde-mid);
+  margin: 20px 0 8px;
+}
+p { margin-bottom: 12px; text-align: justify; }
+ul, ol { padding-left: 22px; margin-bottom: 12px; }
+li { margin-bottom: 5px; }
+
+/* ── Tablas ── */
+.tabla-wrap { overflow-x: auto; margin: 16px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+thead th {
+  background: var(--verde);
+  color: #fff;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+tbody tr:nth-child(even) { background: rgba(201,168,76,.06); }
+tbody tr:hover { background: rgba(201,168,76,.12); }
+td { padding: 9px 12px; border-bottom: 1px solid var(--borde); color: var(--gris); vertical-align: top; }
+td strong { color: var(--verde); }
+
+/* ── Nota/callout ── */
+.nota {
+  background: rgba(201,168,76,.09);
+  border-left: 4px solid var(--dorado);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-size: 13.5px;
+  color: var(--gris-sub);
+  font-style: italic;
+}
+.nota strong { color: var(--gris); font-style: normal; }
+.nota-roja {
+  background: rgba(139,26,26,.06);
+  border-left-color: var(--rojo);
+  color: #5a1010;
+}
+
+/* ── Código ── */
+code {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: rgba(26,61,43,.07);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: .88em;
+  color: var(--verde);
+}
+
+/* ── Badge de prioridad ── */
+.p-alta { background: rgba(139,26,26,.12); color: var(--rojo); font-weight: 700; font-size: 11px;
+  padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+.p-media { background: rgba(201,168,76,.2); color: #7a5c00; font-weight: 700; font-size: 11px;
+  padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+
+/* ── Link ── */
+a { color: var(--verde-mid); }
+a:hover { color: var(--dorado); }
+
+/* ── URL box ── */
+.url-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--verde);
+  color: var(--dorado);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 8px 0;
+  transition: background .15s;
+}
+.url-box:hover { background: var(--verde-mid); color: var(--dorado); }
+
+/* ── Firma ── */
+.firmas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+.firma-box {
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
+}
+.firma-linea {
+  border-bottom: 1px solid var(--gris-sub);
+  margin: 40px 16px 8px;
+}
+.firma-label { font-size: 12px; color: var(--gris-sub); }
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  body { flex-direction: column; }
+  #sidebar { width: 100%; min-width: 0; height: auto; position: static; }
+  #content { padding: 28px 20px 60px; }
+}
+
+/* ── Print ── */
+@media print {
+  #sidebar { display: none; }
+  #content { max-width: 100%; padding: 20px; }
+  h2.sec-titulo { page-break-before: always; }
+}
+
+/* ── Guía de inicio rápido ── */
+.qsg-pasos { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
+.qsg-paso {
+  display: flex; gap: 18px; align-items: flex-start;
+  background: #fff; border: .5px solid var(--borde); border-radius: 10px;
+  padding: 18px 20px;
+}
+.qsg-num {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--verde); color: var(--dorado);
+  font-family: 'Lora', serif; font-size: 16px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.qsg-paso-body { flex: 1; }
+.qsg-paso-titulo { font-weight: 700; color: var(--verde); font-size: 14.5px; margin-bottom: 5px; }
+.qsg-paso-desc { font-size: 13.5px; color: var(--gris-sub); line-height: 1.6; }
+.qsg-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 600; padding: 2px 9px;
+  border-radius: 20px; margin-left: 8px; vertical-align: middle;
+}
+.qsg-badge.socio { background: rgba(26,61,43,.1); color: var(--verde); }
+.qsg-badge.com { background: rgba(201,168,76,.2); color: #7a5a00; }
+.qsg-badge.ambos { background: rgba(26,61,43,.06); color: var(--gris-sub); }
+.qsg-pre {
+  background: rgba(26,61,43,.05); border-left: 3px solid var(--dorado);
+  border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0;
+  font-size: 13.5px; color: var(--gris-sub);
+}
+.qsg-pre strong { color: var(--verde); font-style: normal; }
+
+/* ── Manual de uso ── */
+.man-modulo {
+  background: #fff; border: .5px solid var(--borde); border-radius: 10px;
+  overflow: hidden; margin: 16px 0;
+}
+.man-modulo-hdr {
+  display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+  background: rgba(26,61,43,.04); border-bottom: .5px solid var(--borde);
+}
+.man-modulo-ico {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--verde); color: var(--dorado);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.man-modulo-tit { font-family: 'Lora', serif; font-weight: 700; color: var(--verde); font-size: 14px; }
+.man-modulo-sub { font-size: 11.5px; color: var(--gris-sub); margin-top: 2px; }
+.man-modulo-body { padding: 16px 18px; }
+.man-modulo-body ul { padding-left: 20px; margin: 8px 0; }
+.man-modulo-body li { margin-bottom: 6px; font-size: 13.5px; color: var(--gris); line-height: 1.6; }
+.man-modulo-body li strong { color: var(--verde); }
+.man-alerta {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(139,26,26,.05); border-left: 3px solid #8b1a1a;
+  border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0;
+  font-size: 13px; color: #5a1010;
+}
+.man-tip {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(201,168,76,.08); border-left: 3px solid var(--dorado);
+  border-radius: 0 8px 8px 0; padding: 10px 14px; margin: 10px 0;
+  font-size: 13px; color: var(--gris-sub);
+}
+
+/* ── FAQ ── */
+.faq-lista { display: flex; flex-direction: column; gap: 0; margin: 16px 0; }
+.faq-item { border-bottom: .5px solid var(--borde); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 4px; cursor: pointer; gap: 12px;
+  font-weight: 600; color: var(--verde); font-size: 14px;
+  user-select: none;
+}
+.faq-q::after {
+  content: '+'; font-size: 20px; color: var(--dorado);
+  font-weight: 400; flex-shrink: 0; transition: transform .2s;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  display: none; padding: 0 4px 16px;
+  font-size: 13.5px; color: var(--gris-sub); line-height: 1.7;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-cat {
+  font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--dorado); font-weight: 700; margin: 28px 0 8px;
+}
+.faq-ref {
+  display: inline-block; font-size: 11px; background: rgba(26,61,43,.08);
+  color: var(--verde); border-radius: 4px; padding: 1px 6px; margin-left: 6px;
+  font-weight: 600; vertical-align: middle;
+}
+
+/* Sidebar colapsable por grupo */
+.sb-group {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; user-select: none;
+}
+.sb-group::after {
+  content: '\2303'; font-size: 12px; opacity: .5;
+  transition: transform .2s; display: inline-block;
+}
+.sb-group.collapsed::after { transform: rotate(180deg); }
+.sb-section-links { overflow: hidden; transition: max-height .25s ease; }
+.sb-section-links.collapsed { max-height: 0 !important; }
+
+
+/* ── Placeholder de imagen ── */
+.img-placeholder {
+  width: 100%; min-height: 280px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(26,61,43,.04),
+    rgba(26,61,43,.04) 10px,
+    rgba(201,168,76,.06) 10px,
+    rgba(201,168,76,.06) 20px
+  );
+  border: 2px dashed rgba(201,168,76,.5);
+  border-radius: 10px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; color: var(--gris-sub);
+  font-size: 13.5px; font-style: italic;
+  text-align: center; padding: 24px;
+  margin: 16px 0;
+}
+.img-placeholder i { font-size: 36px; opacity: .35; display: block; }
+.img-placeholder strong { color: var(--verde); font-style: normal; font-size: 14px; }
+
+
+/* ── Oferta de gestión (modelo de la cátedra) ── */
+.bookref{display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;background:var(--crema2);color:var(--gris-sub);border:1px solid var(--borde);border-radius:6px;padding:1px 8px;margin-left:.45rem;vertical-align:middle;letter-spacing:.01em;font-family:ui-monospace,Menlo,monospace}
+.bookref::before{content:'\00a7\00a0';color:var(--dorado);font-weight:700}
+.live-embed{border:1px solid var(--borde);border-radius:10px;overflow:hidden;margin:1.3rem 0 .7rem;background:#fff}
+.live-embed .le-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem .9rem;padding:.55rem .85rem;background:var(--crema2);border-bottom:1px solid var(--borde)}
+.live-embed .le-t{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gris-sub);display:flex;align-items:center;gap:7px}
+.live-embed .le-t::before{content:'';width:6px;height:6px;border-radius:50%;background:#2d9b57;flex:none}
+.live-embed .le-open{font-size:11.5px;font-weight:700;color:#fff;text-decoration:none;background:var(--verde);border-radius:6px;padding:4px 12px;white-space:nowrap}
+.live-embed .le-open:hover{background:var(--verde-mid)}
+.live-embed iframe{display:block;width:100%;height:560px;border:0;background:#fff}.gantt-alt{margin:0 0 1.2rem}.gantt-alt summary{cursor:pointer;color:var(--verde-mid);font-weight:600;font-size:.88rem;margin-bottom:.6rem}.gantt-alt .le-img,.live-embed .le-img{display:block;border:1px solid var(--borde);border-radius:10px;overflow:hidden;background:#fbf8f1}.le-img img{display:block;width:100%;height:auto}.live-embed .le-img:hover img{opacity:.92}
+.figcap{font-size:.78rem;color:var(--gris-sub);text-align:center;margin-top:.7rem;font-style:italic;margin-bottom:1.2rem}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:.8rem;margin:1.15rem 0 1.35rem}
+.member{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:1.05rem .8rem .95rem;text-align:center}
+.m-photo{display:block;width:76px;height:76px;margin:0 auto .75rem;border-radius:50%;object-fit:cover;border:2px solid var(--dorado);background:var(--crema2) center/58% no-repeat url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2737%27%20r%3D%2717%27%20fill%3D%27%23b9a77a%27%2F%3E%3Cpath%20d%3D%27M50%2059c-16%200-29%2011-29%2025v16h58V84c0-14-13-25-29-25z%27%20fill%3D%27%23b9a77a%27%2F%3E%3C%2Fsvg%3E")}
+.member .m-name{font-weight:700;font-size:.87rem;color:var(--verde);line-height:1.3}
+.member .m-role{font-size:.75rem;color:var(--gris-sub);line-height:1.4;margin-top:.28rem}
+.deflist{margin:1.1rem 0;border-top:1px solid var(--borde)}
+.deflist .d-row{display:grid;grid-template-columns:210px 1fr;gap:1rem;padding:.6rem 0;border-bottom:1px solid var(--borde);font-size:.88rem}
+.deflist .d-row:last-child{border-bottom:none}
+.deflist .d-k{font-weight:700;color:var(--verde)}
+.deflist .d-v{line-height:1.55}
+@media(max-width:560px){.live-embed iframe{height:430px}.team-grid{grid-template-columns:repeat(2,1fr)}.deflist .d-row{grid-template-columns:1fr;gap:.15rem}}
+@media print{.live-embed iframe{display:none}}
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-ico">CM</div>
+    <div class="sb-logo-txt">
+      <strong>Centro Molisano Monforte</strong>
+      Sistema de Gestión Digital de Socios
+    </div>
+  </div>
+
+  <div class="sb-group" onclick="toggleSbGroup(this)">Guía de uso</div>
+  <div class="sb-section-links">
+    <a class="sb-link" href="#s1">1 · Manual de Uso</a>
+    <a class="sb-link sb-sub" href="#s1-1">1.1 Perfil Socio</a>
+    <a class="sb-link sb-sub" href="#s1-2">1.2 Perfil Comisión</a>
+    <a class="sb-link sb-sub" href="#s1-3">1.3 Resolución de problemas</a>
+    <a class="sb-link" href="#s2">2 · Preguntas Frecuentes</a>
+  </div>
+
+</nav>
+
+<!-- ══ CONTENIDO ══ -->
+<main id="content">
+
+  <!-- PORTADA -->
+  <div class="portada">
+    <div class="portada-sigla">CM</div>
+    <h1>Manual de Uso y Preguntas Frecuentes</h1>
+    <p class="sub">Sistema de Gestión Digital de Socios &nbsp;·&nbsp; Versión 1.6 &nbsp;·&nbsp; Octubre 2026</p>
+    <div class="tricolor"><span></span><span></span><span></span></div>
+    <div class="portada-meta">
+      <div class="portada-chip"><strong>Club</strong>Centro Molisano Monforte · Villa Bosch</div>
+      <div class="portada-chip"><strong>Para</strong>Socios y Comisión Directiva</div>
+      <div class="portada-chip"><strong>Acceso</strong>proyectogrupo123456.alwaysdata.net</div>
+    </div>
+  </div>
+
+  <!-- ══ 1. MANUAL DE USO ══ -->
+  <section class="seccion" id="s1">
+    <h2 class="sec-titulo"><span class="num">1</span>Manual de Uso</h2>
+    <p>Documentación completa de todas las funciones del sistema, organizada por perfil de usuario. Consultá esta sección cuando necesitás profundidad sobre una función específica.</p>
+
+    <h3 class="sub-titulo" id="s1-1">1.1 Perfil Socio</h3>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🪪</div>
+        <div>
+          <div class="man-modulo-tit">Mi carnet digital</div>
+          <div class="man-modulo-sub">Identidad, QR y estado de cuenta</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Datos del carnet:</strong> nombre, número de socio, DNI, fechas de nacimiento e ingreso, cargo, foto y estado de cuota.</li>
+          <li><strong>Código QR:</strong> firmado por el servidor. Al escanearlo se ve en vivo si el socio está habilitado; no se puede falsificar conociendo el DNI.</li>
+          <li><strong>Estado de cuota:</strong> según el cuadro unificado a continuación.</li>
+        </ul>
+            <div class="tabla-wrap" style="margin:16px 0">
+      <table>
+        <thead><tr><th>Estado</th><th>Color</th><th>Condición</th><th>Aparece en</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Al día</strong></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1a6b38;vertical-align:middle;margin-right:6px"></span>Verde</td>
+            <td>Sin cuotas impagas.</td>
+            <td>Carnet, base de socios, Ingreso cuotas</td>
+          </tr>
+          <tr>
+            <td><strong>Pendiente</strong></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#c9a84c;vertical-align:middle;margin-right:6px"></span>Amarillo</td>
+            <td>La cuota del mes fue generada pero aún no está vencida (días 1 al 10 del mes).</td>
+            <td>Carnet, base de socios (filtro "Pendiente")</td>
+          </tr>
+          <tr>
+            <td><strong>Debe 1</strong></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#e07820;vertical-align:middle;margin-right:6px"></span>Naranja</td>
+            <td>Exactamente 1 cuota vencida sin pagar (a partir del día 11 del mes).</td>
+            <td>Carnet, base de socios (filtro "Debe 1"), Ingreso cuotas</td>
+          </tr>
+          <tr>
+            <td><strong>Debe 2+ (moroso)</strong></td>
+            <td><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#8b1a1a;vertical-align:middle;margin-right:6px"></span>Rojo</td>
+            <td>2 o más cuotas vencidas sin pagar. Equivale a "Debe 2+" en los filtros del padrón.</td>
+            <td>Carnet, base de socios (filtro "Debe 2+"), Ingreso cuotas</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nota">El término <strong>"Vencida"</strong> se usa internamente en la base de datos para denominar una cuota individual sin pagar a partir del día 11. El estado visible al usuario siempre es <strong>Al día / Pendiente / Debe 1 / Moroso</strong>. Los filtros del padrón usan <strong>Debe 1</strong> y <strong>Debe 2+</strong> como equivalentes a "1 cuota morosa" y "moroso (2+)".</div>
+        <ul>
+          <li><strong>Descargar carnet:</strong> como imagen (para guardar en Fotos) o como PDF tamaño tarjeta. La imagen descargada <strong>no muestra el estado de cuota</strong>, porque quedaría desactualizada; el estado real lo da el QR.</li>
+          <li><strong>Pagar con Mercado Pago:</strong> si hay cuotas impagas, el botón lleva a Mercado Pago y la cuota se acredita sola al aprobarse el pago.</li>
+        </ul>
+        <div class="man-tip">💡 Si olvidaste tu contraseña, pedile a la Comisión que la restablezca desde la base de socios: vuelve a ser tu DNI.</div>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📰</div>
+        <div>
+          <div class="man-modulo-tit">Noticias</div>
+          <div class="man-modulo-sub">Novedades del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Las noticias más recientes aparecen primero, con foto y epígrafe.</li>
+          <li>Tocá cualquier noticia para leer el contenido completo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📅</div>
+        <div>
+          <div class="man-modulo-tit">Eventos</div>
+          <div class="man-modulo-sub">Calendario del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>El calendario muestra los eventos del mes. Navegá entre meses con las flechas.</li>
+          <li>Los días con evento tienen un punto dorado; tocá el día para ver el detalle.</li>
+          <li>Si el evento registra asistencia, escaneá con tu celular el QR del evento el mismo día.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🎁</div>
+        <div>
+          <div class="man-modulo-tit">Beneficios</div>
+          <div class="man-modulo-sub">Actividades y convenios</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Arriba, las <strong>actividades del club</strong> (deportes, cultura, espacios).</li>
+          <li>Abajo, los <strong>comercios adheridos</strong> con su descuento. Para usarlo, mostrá el QR de tu carnet.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📊</div>
+        <div>
+          <div class="man-modulo-tit">Encuestas</div>
+          <div class="man-modulo-sub">Votaciones del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Votá en las encuestas abiertas. Cada socio vota una sola vez.</li>
+          <li>En las encuestas anónimas no queda registrado qué votaste.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📬</div>
+        <div>
+          <div class="man-modulo-tit">Comunicados</div>
+          <div class="man-modulo-sub">Bandeja de entrada</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Recibís los mensajes de la Comisión (comunicados, recordatorios de cuota).</li>
+          <li>Los no leídos tienen un indicador en el menú; al abrirlos quedan leídos.</li>
+        </ul>
+        <div class="man-tip">💡 Los mensajes se borran automáticamente a los 6 meses de leídos para mantener la bandeja ordenada.</div>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">💬</div>
+        <div>
+          <div class="man-modulo-tit">Consultas</div>
+          <div class="man-modulo-sub">Preguntas a la Comisión</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Tocá <strong>Nueva consulta</strong>, escribí el asunto y la pregunta.</li>
+          <li>La Comisión responde en la misma conversación y podés seguir escribiendo.</li>
+          <li>El menú muestra un contador cuando hay respuestas nuevas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🏛️</div>
+        <div>
+          <div class="man-modulo-tit">Reservas</div>
+          <div class="man-modulo-sub">Solicitar un espacio del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Elegí el espacio, la fecha y el horario; el sistema verifica disponibilidad y capacidad.</li>
+          <li>La solicitud queda <em>Pendiente</em> hasta que la Comisión la acepte (con o sin seña) o la rechace.</li>
+          <li>Si te piden seña, podés pagarla con Mercado Pago.</li>
+          <li>Podés cancelar una reserva pendiente, o aceptada sin seña, desde <em>Mis reservas</em>.</li>
+        </ul>
+        <div class="man-alerta">⚠️ Las reservas canceladas después de pagar la seña pueden implicar su pérdida. Consultá con la Comisión.</div>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">👥</div>
+        <div>
+          <div class="man-modulo-tit">Comisión y Nuestras raíces</div>
+          <div class="man-modulo-sub">Información del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Comisión:</strong> los miembros de la Comisión Directiva con su cargo y foto, y el contacto de secretaría.</li>
+          <li><strong>Nuestras raíces:</strong> la historia del club.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">👤</div>
+        <div>
+          <div class="man-modulo-tit">Mi perfil</div>
+          <div class="man-modulo-sub">Datos personales</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Ver tus datos, cambiar tu foto de perfil y cambiar tu contraseña (pide la actual).</li>
+          <li>Para corregir otros datos (DNI, dirección, mail), pedíselo a la Comisión.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="sub-titulo" id="s1-2">1.2 Perfil Comisión Directiva</h3>
+    <p>Cada miembro ve las secciones que tiene habilitadas. Los administradores ven todas, más Permisos y Limpieza de datos.</p>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📊</div>
+        <div>
+          <div class="man-modulo-tit">Panel de administración</div>
+          <div class="man-modulo-sub">Vista general del club</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Indicadores en tiempo real:</strong> socios activos, al día, con deuda y alerta de morosidad (para quien tiene Ingreso cuotas).</li>
+          <li><strong>Accesos rápidos:</strong> tarjetas a cada sección habilitada.</li>
+          <li><strong>Ver como socio:</strong> muestra la app como la ve un socio, para revisarla.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">👥</div>
+        <div>
+          <div class="man-modulo-tit">Base de socios</div>
+          <div class="man-modulo-sub">Padrón completo · módulo Socios</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Buscador:</strong> por nombre, apellido, DNI o número, con el texto buscado resaltado.</li>
+          <li><strong>Filtros:</strong> Todos / Al día / Pendiente / Debe 1 / Debe 2+ / Dados de baja.</li>
+          <li><strong>Nuevo socio:</strong> formulario completo; sugiere el próximo número libre y avisa si el DNI, el mail o el número ya existen.</li>
+          <li><strong>Ficha:</strong> datos, estado de cuenta con los últimos meses, enviar mensaje, registrar pago, editar.</li>
+          <li><strong>Acceso y permisos</strong> (administradores): hacer a alguien miembro de la Comisión, administrador, y elegir sus módulos.</li>
+          <li><strong>Baja / Eliminar:</strong> la baja conserva el historial y es reversible; eliminar es definitivo.</li>
+          <li><strong>Restablecer contraseña:</strong> vuelve a ser el DNI del socio.</li>
+          <li><strong>Categorías:</strong> crear y editar categorías con su cuota o exentas.</li>
+          <li><strong>Excel:</strong> descarga el padrón completo con la deuda de cada socio.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">💰</div>
+        <div>
+          <div class="man-modulo-tit">Ingreso cuotas</div>
+          <div class="man-modulo-sub">Cuotas, señas e ingresos · módulo Ingreso cuotas</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Indicadores:</strong> ingresos del mes, cuotas cobradas, señas y morosidad.</li>
+          <li><strong>Registrar pago:</strong> buscá el socio, elegí el mes (se sugiere el más viejo sin pagar), monto y forma de pago. Admite dos formas de pago en un mismo cobro.</li>
+          <li><strong>Otros ingresos:</strong> bufet, alquileres, donaciones.</li>
+          <li><strong>Señas de reservas:</strong> se registran al confirmar la seña o al pagarla por Mercado Pago.</li>
+          <li><strong>Valor de la cuota:</strong> valor general; cada categoría puede tener el suyo.</li>
+          <li><strong>Historial:</strong> movimientos filtrados por tipo (Todos / Cuotas / Señas / Mercado Pago).</li>
+          <li><strong>Exportar a Excel:</strong> cobros de un período con resumen por forma de pago.</li>
+        </ul>
+        <div class="man-tip">💡 Las cuotas del mes se generan solas el día 1. Del 1 al 10 figuran como <strong>Pendiente</strong>; desde el 11, si no se pagaron, como deuda.</div>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">✉️</div>
+        <div>
+          <div class="man-modulo-tit">Enviar mensajes y Consultas</div>
+          <div class="man-modulo-sub">Comunicación · módulo Mensajes</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Comunicados:</strong> a todos, al día, con deuda o un socio particular, con archivo adjunto.</li>
+          <li><strong>Mensajes automáticos:</strong> se envían solos un día fijo del mes, el 1° de cada mes o sólo a mano. Cada uno se puede activar, desactivar o enviar en el momento.</li>
+          <li><strong>Recordatorio de cuota:</strong> botón que crea en un paso el aviso del día 8 para los socios que todavía no pagaron el mes.</li>
+          <li><strong>Consultas:</strong> las preguntas de los socios, respondidas como conversación.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🗓️</div>
+        <div>
+          <div class="man-modulo-tit">Reservas</div>
+          <div class="man-modulo-sub">Gestión de espacios · módulo Reservas</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Las solicitudes llegan como <em>Pendiente</em>.</li>
+          <li><strong>Aceptar</strong> sin seña, o <strong>Aceptar con seña</strong> fijando el monto; después se marca <strong>Confirmar seña pagada</strong> (o se acredita sola si se pagó por Mercado Pago).</li>
+          <li><strong>Rechazar</strong> con un motivo que le llega al socio.</li>
+          <li>El sistema no permite dos reservas del mismo espacio, fecha y horario.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">📝</div>
+        <div>
+          <div class="man-modulo-tit">Editar contenido</div>
+          <div class="man-modulo-sub">Contenido y datos del club · módulo Contenido</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li><strong>Noticias, Eventos, Beneficios:</strong> con foto, se pueden editar, ocultar o borrar. En Eventos, el botón <em>Asistencia</em> muestra el QR del evento y la lista de asistentes.</li>
+          <li><strong>Encuestas:</strong> con opciones, fecha de cierre y opción de voto anónimo.</li>
+          <li><strong>Espacios:</strong> los espacios reservables con foto, capacidad y horarios.</li>
+          <li><strong>Actividades:</strong> las actividades del club que se ven en Beneficios.</li>
+          <li><strong>Datos del club:</strong> dirección, teléfono, WhatsApp, mail, horario y redes.</li>
+          <li><strong>Formas de pago</strong> y <strong>Cargos</strong> de la Comisión (el orden de los cargos es el orden de la pantalla Comisión).</li>
+          <li>Las imágenes se validan automáticamente (JPG, PNG o WEBP, máx. 5 MB).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🙋</div>
+        <div>
+          <div class="man-modulo-tit">Solicitudes de nuevos socios</div>
+          <div class="man-modulo-sub">Gestión de admisiones · módulo Socios</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Llegan desde el formulario de la página pública, que se puede abrir o cerrar desde esta pantalla.</li>
+          <li>Pestañas <em>Pendientes</em>, <em>Aceptadas</em> y <em>Rechazadas</em>.</li>
+          <li><strong>Aceptar:</strong> crea el socio en una transacción, con categoría Activo y la cuota del mes.</li>
+          <li><strong>Reevaluar:</strong> una solicitud rechazada puede volver a tratarse.</li>
+          <li>Las rechazadas con más de 1 año se eliminan automáticamente (Ley N.° 25.326).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🔑</div>
+        <div>
+          <div class="man-modulo-tit">Permisos</div>
+          <div class="man-modulo-sub">Sólo administradores</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Lista de los miembros de la Comisión con casillas para cada módulo y para "Administrador".</li>
+          <li>Los cambios se guardan solos y el miembro los ve la próxima vez que abre la app.</li>
+          <li>Un administrador no puede quitarse a sí mismo el rol.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="man-modulo">
+      <div class="man-modulo-hdr">
+        <div class="man-modulo-ico">🧹</div>
+        <div>
+          <div class="man-modulo-tit">Limpieza de datos</div>
+          <div class="man-modulo-sub">Sólo administradores</div>
+        </div>
+      </div>
+      <div class="man-modulo-body">
+        <ul>
+          <li>Para dejar el sistema en blanco antes de abrirlo a los socios.</li>
+          <li>Pasos: descargar una copia de seguridad, marcar los socios que se quedan, elegir qué borrar (cuotas, mensajes, reservas, contenido, etc.) y escribir BORRAR.</li>
+          <li>Si algo falla en el medio no se borra nada.</li>
+        </ul>
+        <div class="man-alerta">⚠️ Es irreversible. Hacé además un backup de la base desde el panel del hosting.</div>
+      </div>
+    </div>
+
+    <h3 class="sub-titulo" id="s1-3">1.3 Resolución de problemas comunes</h3>
+    <div class="tabla-wrap">
+      <table>
+        <thead><tr><th>Problema</th><th>Causa probable</th><th>Solución</th></tr></thead>
+        <tbody>
+          <tr><td>No puedo iniciar sesión</td><td>Contraseña incorrecta o cuenta bloqueada</td><td>Esperá 15 minutos o pedile a la Comisión que restablezca tu contraseña (vuelve a ser tu DNI).</td></tr>
+          <tr><td>No veo una sección del panel</td><td>No tenés permiso para ese módulo</td><td>Pedile a un administrador que te la habilite en Permisos.</td></tr>
+          <tr><td>El QR no se escanea</td><td>Brillo de pantalla bajo o el escáner está muy lejos</td><td>Subí el brillo al máximo y acercá el QR al escáner.</td></tr>
+          <tr><td>"Sesión inválida o expirada"</td><td>Token de sesión vencido</td><td>Cerrá sesión y volvé a iniciarla.</td></tr>
+          <tr><td>La cuota aparece pendiente pero ya pagué</td><td>El pago en efectivo o transferencia no fue registrado</td><td>Avisale a la Comisión para que lo registre en Ingreso cuotas.</td></tr>
+          <tr><td>No me llegan mails del club</td><td>El envío de mails está desactivado en esta etapa</td><td>Los avisos se ven en Comunicados y Consultas dentro de la app.</td></tr>
+          <tr><td>Página en blanco o vieja al entrar</td><td>Caché del navegador desactualizado</td><td>Apretá Ctrl+Shift+R (o Cmd+Shift+R en Mac) para forzar la recarga.</td></tr>
+          <tr><td>No puedo enviar una solicitud de asociación</td><td>El formulario está cerrado o se usa desde un archivo descargado</td><td>Consultá a la Comisión si está abierto y usá la dirección del sitio, no un archivo.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ 2. PREGUNTAS FRECUENTES ══ -->
+  <section class="seccion" id="s2">
+    <h2 class="sec-titulo"><span class="num">2</span>Preguntas Frecuentes</h2>
+    <p>Respuestas puntuales a las dudas más comunes. No hace falta leer todo: encontrá tu pregunta y leé solo esa.</p>
+
+    <div class="faq-cat">Acceso y cuenta</div>
+    <div class="faq-lista">
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Con qué datos inicio sesión?</div>
+        <div class="faq-a">Con tu <strong>número de DNI</strong> (sin puntos) y tu contraseña. La primera vez, la contraseña suele ser también tu DNI, salvo que la Comisión te haya dado otra al darte de alta.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Qué hago si olvidé mi contraseña?</div>
+        <div class="faq-a">Pedile a cualquier miembro de la Comisión que la restablezca desde la base de socios: vuelve a ser tu DNI. La recuperación por mail queda disponible cuando se active el envío de mails.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Me bloquearon la cuenta, ¿qué hago?</div>
+        <div class="faq-a">Si ingresás mal la contraseña 8 veces seguidas, la cuenta se bloquea 15 minutos por seguridad. Esperá y volvé a intentarlo. Si el problema persiste, contactá a la Comisión.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Puedo iniciar sesión desde el celular?</div>
+        <div class="faq-a">Sí. El sistema funciona en cualquier navegador actualizado (Chrome, Firefox, Safari) en celular, tablet o computadora. No hace falta instalar ninguna aplicación.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cat">Cuotas y estado de cuenta</div>
+    <div class="faq-lista">
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Qué significa el estado "Pendiente" en mi cuota?</div>
+        <div class="faq-a">Del día 1 al 10 de cada mes la cuota aparece como <em>Pendiente</em>: todavía estás en término para pagar. A partir del día 11, si no pagaste, pasa a deuda.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Pagué la cuota en efectivo, ¿cuándo se actualiza el sistema?</div>
+        <div class="faq-a">Cuando la Comisión registra tu pago en Ingreso cuotas. El cambio es inmediato en toda la plataforma. Si pagás por Mercado Pago desde el carnet, se actualiza solo.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cuánto vale la cuota?</div>
+        <div class="faq-a">Depende de tu categoría (Activo, Cadete, Familiar, etc.). La Comisión fija el valor general y el de cada categoría.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Me avisan antes de que venza?</div>
+        <div class="faq-a">Sí, si la Comisión activó el recordatorio de cuota: el día 8 llega un aviso a Comunicados para quienes todavía no pagaron el mes.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cat">Carnet y QR</div>
+    <div class="faq-lista">
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿El QR muestra si debo cuotas?</div>
+        <div class="faq-a">Sí. Al escanearlo, la pantalla de verificación muestra el nombre y si el socio está habilitado, en tiempo real.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Por qué el carnet descargado no dice si estoy al día?</div>
+        <div class="faq-a">Porque una imagen guardada queda vieja: podría decir "al día" meses después. El estado real lo muestra siempre el QR al escanearlo.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Puedo imprimir el carnet?</div>
+        <div class="faq-a">Sí: <strong>Descargar carnet</strong> ofrece una imagen o un PDF tamaño tarjeta.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cat">Reservas</div>
+    <div class="faq-lista">
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cómo sé si mi reserva fue aprobada?</div>
+        <div class="faq-a">Recibís un mensaje en Comunicados cuando la Comisión resuelve la solicitud, y el estado se ve en Reservas › Mis reservas.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿La seña se paga dentro del sistema?</div>
+        <div class="faq-a">Podés pagarla con Mercado Pago desde la reserva, o en efectivo o transferencia al club; en ese caso la Comisión la registra.</div>
+      </div>
+
+    </div>
+
+    <div class="faq-cat">Para la Comisión Directiva</div>
+    <div class="faq-lista">
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cómo agrego un nuevo socio sin solicitud?</div>
+        <div class="faq-a">Desde <strong>Base de socios</strong> → <em>+ Nuevo socio</em>. Sólo nombre, apellido y DNI son obligatorios. Al terminar, el sistema muestra el usuario y la contraseña para copiar.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cómo hago que alguien sea de la Comisión?</div>
+        <div class="faq-a">Un administrador abre su ficha en Base de socios y, en <em>Acceso y permisos</em>, marca "Miembro de la Comisión" y los módulos que va a usar. Si tiene cargo, escribilo en su ficha: aparece en la pantalla Comisión de los socios.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Por qué un miembro de la Comisión no ve una sección?</div>
+        <div class="faq-a">Porque no tiene ese módulo habilitado. Un administrador lo habilita en <strong>Permisos</strong>.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Puedo crear un recordatorio mensual de la cuota?</div>
+        <div class="faq-a">Sí. En <strong>Enviar mensajes</strong> → <em>Mensajes automáticos</em> → <em>Recordatorio de cuota</em>. Queda armado para el día 8, a los socios que todavía no pagaron el mes; podés cambiar el texto antes de guardar.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Se pueden sacar los datos a Excel?</div>
+        <div class="faq-a">Sí: el padrón desde Base de socios (botón Excel) y los cobros de un período desde Ingreso cuotas (Exportar a Excel).</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Qué pasa si el mantenimiento automático no corrió este mes?</div>
+        <div class="faq-a">Se dispara la primera vez que alguien entra al sistema cada día. Si el día 1 nadie entró, las cuotas se generan el primer día que alguien ingrese.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Cómo elimino a un socio definitivamente?</div>
+        <div class="faq-a">Desde la ficha del socio → <em>Eliminar de la base</em>, confirmando el número de socio. No se puede deshacer. Para quitarle el acceso sin perder su historial, usá <em>Dar de baja</em>.</div>
+      </div>
+
+      <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q">¿Los datos de los socios están protegidos?</div>
+        <div class="faq-a">Sí. Las contraseñas se guardan encriptadas con bcrypt, el padrón sólo lo ven los miembros de la Comisión con permiso de Socios y las encuestas anónimas no guardan qué votó cada uno. El sistema sigue los lineamientos de la Ley N.° 25.326.</div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--borde);margin:40px 0 20px">
+  <p style="text-align:center;font-size:12px;color:var(--gris-sub)">
+    <strong>Centro Molisano Monforte</strong> · Sistema de Gestión Digital de Socios<br>
+    Manual de Uso y Preguntas Frecuentes · Versión 1.6 · Octubre 2026
+  </p>
+</main>
+
+<script>
+// Activar el link del sidebar según el scroll
+const links = document.querySelectorAll('.sb-link[href^="#"]');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+document.querySelectorAll('.seccion').forEach(s => observer.observe(s));
+
+function toggleSbGroup(el){
+  el.classList.toggle('collapsed');
+  const links = el.nextElementSibling;
+  if(links && links.classList.contains('sb-section-links')){
+    links.classList.toggle('collapsed');
+  }
+}
+// Inicializar alturas para la animación
+document.querySelectorAll('.sb-section-links').forEach(el => {
+  el.style.maxHeight = el.scrollHeight + 'px';
+});
+
+
+// Ver una imagen en tamaño completo (diagrama ER)
+function verImagenGrande(img){
+  const o=document.createElement('div');
+  o.style.cssText='position:fixed;inset:0;background:rgba(15,31,23,.92);z-index:9999;overflow:auto;cursor:zoom-out;padding:20px';
+  const i=document.createElement('img'); i.src=img.src; i.style.cssText='display:block;max-width:none;width:2400px;margin:0 auto;border-radius:6px';
+  o.appendChild(i); o.onclick=()=>o.remove(); document.body.appendChild(o);
+}
+</script>
+</body>
+</html>
